@@ -51,10 +51,78 @@ function ProviderPicker({ onPick }: { onPick: (p: Provider) => void }) {
 }
 
 function ConnectionPanel({ provider }: { provider: Provider }) {
+  if (provider === 'okta') return <OktaConnectionPanel />;
   return (
     <div>
       <p>Connected: {provider}</p>
       <button>Test sign-in</button>
+    </div>
+  );
+}
+
+// MIN-12: Okta-specific setup. Admin pastes the metadata URL or uploads
+// the metadata XML; we POST to /api/auth/admin/sso/okta which forwards to
+// WorkOS. Group claim mapping (Okta `groups` → Mintie role) is configured
+// per-org from the connection details once the connection is active.
+function OktaConnectionPanel() {
+  const [mode, setMode] = useState<'url' | 'xml'>('url');
+  const [metadataUrl, setMetadataUrl] = useState('');
+  const [metadataXml, setMetadataXml] = useState('');
+  const [status, setStatus] = useState<'idle' | 'saving' | 'connected' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
+
+  async function submit() {
+    setStatus('saving');
+    setError(null);
+    try {
+      const res = await fetch('/api/auth/admin/sso/okta', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(mode === 'url' ? { metadataUrl } : { metadataXml }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setStatus('connected');
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'connection failed');
+      setStatus('error');
+    }
+  }
+
+  return (
+    <div>
+      <h2>Connect Okta</h2>
+      <fieldset>
+        <label>
+          <input type="radio" checked={mode === 'url'} onChange={() => setMode('url')} />
+          Metadata URL
+        </label>
+        <label>
+          <input type="radio" checked={mode === 'xml'} onChange={() => setMode('xml')} />
+          Metadata XML
+        </label>
+      </fieldset>
+
+      {mode === 'url' ? (
+        <input
+          type="url"
+          placeholder="https://your-org.okta.com/app/exk.../sso/saml/metadata"
+          value={metadataUrl}
+          onChange={(e) => setMetadataUrl(e.target.value)}
+        />
+      ) : (
+        <textarea
+          placeholder="<EntityDescriptor ...>"
+          value={metadataXml}
+          onChange={(e) => setMetadataXml(e.target.value)}
+          rows={8}
+        />
+      )}
+
+      <button onClick={submit} disabled={status === 'saving'}>
+        {status === 'saving' ? 'Connecting…' : 'Connect'}
+      </button>
+      {status === 'connected' && <p>Connected. Run a Test sign-in to verify.</p>}
+      {status === 'error' && <p role="alert">{error}</p>}
     </div>
   );
 }
