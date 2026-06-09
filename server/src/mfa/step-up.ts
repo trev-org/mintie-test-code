@@ -8,7 +8,8 @@ export type SensitiveAction =
   | 'apikey.create'
   | 'billing.change'
   | 'member.remove'
-  | 'sso.connection.update';
+  | 'sso.connection.update'
+  | 'sso.connection.delete';
 
 export async function requireStepUp(_p: AuthenticatedPrincipal, _action: SensitiveAction) {
   // throw if step-up not satisfied within the last N minutes
