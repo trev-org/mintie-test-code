@@ -39,3 +39,26 @@ shared/               Cross-cutting types
 | MIN-18 | Step-up MFA | `server/src/mfa/step-up.ts` |
 | MIN-19 | Audit log | `server/src/audit/log.ts` |
 | MIN-20 | JIT provisioning | `server/src/auth/jit.ts` |
+
+## Public API (v1)
+
+The current public API version is **v1** (`API_VERSION` in `server/src/api/version.ts`, served at `GET /api/version`). The OpenAPI spec for this surface is published in the docs repo (`mintie-test`) at `api-reference/openapi.v1.json`.
+
+| Spec operation | Method & path | Handler |
+|---|---|---|
+| `idpLookup` | `POST /api/auth/idp-lookup` | `server/src/auth/idp-lookup.ts` |
+| `listApiKeys` | `GET /api/auth/api-keys` | `server/src/auth/api-keys.ts` |
+| `connectOktaSso` | `POST /api/auth/admin/sso/okta` | `server/src/auth/admin-sso.ts` |
+| `scimListUsers` / `scimCreateUser` | `GET`/`POST /scim/v2/Users` | `server/src/scim/routes.ts` |
+| `scimDeleteUser` | `DELETE /scim/v2/Users/{id}` | `server/src/scim/routes.ts` |
+
+> **Note:** `/scim/v2` is the SCIM 2.0 protocol version, not the Mintie API version. The Mintie API version is `API_VERSION`.
+
+### Releasing a new version (docs automation)
+
+A Mintlify [automation](https://www.mintlify.com/docs/automations) is configured to run whenever this codebase is updated. When you ship a new API version, it regenerates the docs in `mintie-test`:
+
+1. Bump `API_VERSION` (e.g. to `v2`) and add the v2 handlers alongside the existing v1 handlers (keep v1 mounted so existing integrations keep working).
+2. Push. The automation adds the new version to the docs version switcher as the default (`tag: "Latest"`) and demotes the previous version to `tag: "Legacy"`.
+
+See `server/src/api/version.ts` for the release checklist.

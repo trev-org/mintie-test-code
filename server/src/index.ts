@@ -1,9 +1,11 @@
 import Fastify from 'fastify';
 import { authRoutes } from './auth/routes.js';
 import { scimRoutes } from './scim/routes.js';
+import { versionRoutes } from './api/version.js';
 
 const app = Fastify({ logger: true });
 
+app.register(versionRoutes, { prefix: '/api' });
 app.register(authRoutes, { prefix: '/api/auth' });
 app.register(scimRoutes, { prefix: '/scim/v2' });
 
