@@ -2,7 +2,7 @@
   "name": "mintie-test-code",
   "private": true,
   "version": "0.0.0",
-  "workspaces": ["server", "web", "shared"],
+  "workspaces": ["server", "web", "shared", "sdk"],
   "scripts": {
     "dev:server": "npm --workspace server run dev",
     "dev:web": "npm --workspace web run dev",

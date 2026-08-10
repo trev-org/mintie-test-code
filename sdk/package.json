@@ -1,0 +1,14 @@
+{
+  "name": "@mintie/sso",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for the Mintie SSO API",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "docs": "typedoc --json typedoc.json src/index.ts"
+  },
+  "devDependencies": {
+    "typedoc": "^0.28.0",
+    "typescript": "^5.4.0"
+  }
+}

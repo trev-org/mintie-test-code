@@ -17,7 +17,16 @@ server/               Node/TS API
   mfa/                Step-up MFA
 web/                  React frontend (login, settings, hooks)
 shared/               Cross-cutting types
+sdk/                  Public TypeScript SDK (@mintie/sso) + TypeDoc artifact
 ```
+
+## SDK reference docs
+
+`sdk/typedoc.json` is the TypeDoc JSON artifact for the SDK. The docs site
+([mintietest.mintlify.app](https://mintietest.mintlify.app)) fetches it from this repo's `main` branch at build
+time to generate the TypeScript SDK reference pages. After changing
+`sdk/src/`, regenerate it with `npm run docs` in `sdk/` and commit the result;
+the next docs deployment picks it up.
 
 ## Ticket → file map
 

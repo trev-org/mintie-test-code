@@ -1,0 +1,2639 @@
+{
+	"schemaVersion": "2.0",
+	"id": 0,
+	"name": "@mintie/sso",
+	"variant": "project",
+	"kind": 1,
+	"flags": {},
+	"comment": {
+		"summary": [
+			{
+				"kind": "text",
+				"text": "Official TypeScript SDK for the Mintie SSO API."
+			}
+		],
+		"blockTags": [
+			{
+				"tag": "@example",
+				"content": [
+					{
+						"kind": "code",
+						"text": "```ts\nimport { MintieClient } from \"@mintie/sso\";\n\nconst mintie = new MintieClient({ apiKey: process.env.MINTIE_API_KEY! });\nconst { data } = await mintie.connections.list({ status: \"active\" });\n```"
+					}
+				]
+			}
+		]
+	},
+	"children": [
+		{
+			"id": 38,
+			"name": "ConnectionsResource",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Access to the "
+					},
+					{
+						"kind": "code",
+						"text": "`/connections`"
+					},
+					{
+						"kind": "text",
+						"text": " endpoints.\n\nAvailable as "
+					},
+					{
+						"kind": "inline-tag",
+						"tag": "@link",
+						"text": "MintieClient.connections",
+						"target": 67
+					},
+					{
+						"kind": "text",
+						"text": "."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 39,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 113,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 40,
+							"name": "ConnectionsResource",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 113,
+									"character": 2
+								}
+							],
+							"parameters": [
+								{
+									"id": 41,
+									"name": "client",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": 63,
+										"name": "MintieClient",
+										"package": "@mintie/sso"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 38,
+								"name": "ConnectionsResource",
+								"package": "@mintie/sso"
+							}
+						}
+					]
+				},
+				{
+					"id": 49,
+					"name": "create",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 146,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 50,
+							"name": "create",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Create a new SSO connection.\n\nThe connection starts in "
+									},
+									{
+										"kind": "code",
+										"text": "`pending`"
+									},
+									{
+										"kind": "text",
+										"text": " status until the identity provider\nmetadata is verified."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "The created connection."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 146,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 51,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Fields for the new connection."
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"target": 14,
+										"name": "CreateConnectionParams",
+										"package": "@mintie/sso"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 7,
+										"name": "Connection",
+										"package": "@mintie/sso"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 52,
+					"name": "delete",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 158,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 53,
+							"name": "delete",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Permanently delete an SSO connection.\n\nUsers who signed in through this connection keep their accounts but must\nuse another sign-in method."
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 158,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 54,
+									"name": "connectionId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Unique identifier of the connection."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "void"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 46,
+					"name": "get",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 133,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 47,
+							"name": "get",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Fetch a single SSO connection by ID."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "inline-tag",
+												"tag": "@link",
+												"text": "MintieError",
+												"target": 26
+											},
+											{
+												"kind": "text",
+												"text": " with code "
+											},
+											{
+												"kind": "code",
+												"text": "`not_found`"
+											},
+											{
+												"kind": "text",
+												"text": " if the connection does not exist."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 133,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 48,
+									"name": "connectionId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Unique identifier of the connection."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 7,
+										"name": "Connection",
+										"package": "@mintie/sso"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				},
+				{
+					"id": 43,
+					"name": "list",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 123,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 44,
+							"name": "list",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "List SSO connections in your organization, ordered by creation date."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@returns",
+										"content": [
+											{
+												"kind": "text",
+												"text": "A page of connections."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 123,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 45,
+									"name": "params",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Optional status filter and page size."
+											}
+										]
+									},
+									"type": {
+										"type": "reference",
+										"target": 19,
+										"name": "ListConnectionsParams",
+										"package": "@mintie/sso"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 22,
+										"typeArguments": [
+											{
+												"type": "reference",
+												"target": 7,
+												"name": "Connection",
+												"package": "@mintie/sso"
+											}
+										],
+										"name": "Page",
+										"package": "@mintie/sso"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						39
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						49,
+						52,
+						46,
+						43
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 110,
+					"character": 13
+				}
+			]
+		},
+		{
+			"id": 63,
+			"name": "MintieClient",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Client for the Mintie SSO API."
+					}
+				],
+				"blockTags": [
+					{
+						"tag": "@example",
+						"content": [
+							{
+								"kind": "code",
+								"text": "```ts\nconst mintie = new MintieClient({ apiKey: \"mintie_sk_...\" });\n\nconst connection = await mintie.connections.create({\n  name: \"Acme Okta\",\n  provider: \"okta\",\n  domains: [\"acme.com\"],\n});\n```"
+							}
+						]
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 64,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 210,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 65,
+							"name": "MintieClient",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 210,
+									"character": 2
+								}
+							],
+							"parameters": [
+								{
+									"id": 66,
+									"name": "options",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": 3,
+										"name": "MintieClientOptions",
+										"package": "@mintie/sso"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 63,
+								"name": "MintieClient",
+								"package": "@mintie/sso"
+							}
+						}
+					]
+				},
+				{
+					"id": 67,
+					"name": "connections",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Access to the "
+							},
+							{
+								"kind": "code",
+								"text": "`/connections`"
+							},
+							{
+								"kind": "text",
+								"text": " endpoints."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 202,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 38,
+						"name": "ConnectionsResource",
+						"package": "@mintie/sso"
+					}
+				},
+				{
+					"id": 68,
+					"name": "sessions",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Access to the "
+							},
+							{
+								"kind": "code",
+								"text": "`/sessions`"
+							},
+							{
+								"kind": "text",
+								"text": " endpoints."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 204,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 55,
+						"name": "SessionsResource",
+						"package": "@mintie/sso"
+					}
+				},
+				{
+					"id": 72,
+					"name": "request",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 229,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 73,
+							"name": "request",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Send an authenticated request to the Mintie SSO API.\n\nResource classes call this internally; use it directly only for endpoints\nnot yet covered by the SDK."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "inline-tag",
+												"tag": "@link",
+												"text": "MintieError",
+												"target": 26
+											},
+											{
+												"kind": "text",
+												"text": " when the API returns a non-2xx response."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 229,
+									"character": 8
+								}
+							],
+							"typeParameters": [
+								{
+									"id": 74,
+									"name": "T",
+									"variant": "typeParam",
+									"kind": 131072,
+									"flags": {}
+								}
+							],
+							"parameters": [
+								{
+									"id": 75,
+									"name": "method",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "HTTP method."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 76,
+									"name": "path",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Path relative to the base URL, such as "
+											},
+											{
+												"kind": "code",
+												"text": "`/connections`"
+											},
+											{
+												"kind": "text",
+												"text": "."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 77,
+									"name": "options",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {
+										"isOptional": true
+									},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Optional query parameters and JSON body."
+											}
+										]
+									},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 78,
+											"name": "__type",
+											"variant": "declaration",
+											"kind": 65536,
+											"flags": {},
+											"children": [
+												{
+													"id": 80,
+													"name": "body",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isOptional": true
+													},
+													"sources": [
+														{
+															"fileName": "src/index.ts",
+															"line": 232,
+															"character": 49
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "unknown"
+													}
+												},
+												{
+													"id": 79,
+													"name": "query",
+													"variant": "declaration",
+													"kind": 1024,
+													"flags": {
+														"isOptional": true
+													},
+													"sources": [
+														{
+															"fileName": "src/index.ts",
+															"line": 232,
+															"character": 16
+														}
+													],
+													"type": {
+														"type": "reference",
+														"target": {
+															"packageName": "typescript",
+															"packagePath": "lib/lib.es5.d.ts",
+															"qualifiedName": "Record"
+														},
+														"typeArguments": [
+															{
+																"type": "intrinsic",
+																"name": "string"
+															},
+															{
+																"type": "intrinsic",
+																"name": "unknown"
+															}
+														],
+														"name": "Record",
+														"package": "typescript"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Properties",
+													"children": [
+														80,
+														79
+													]
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "reference",
+										"target": 74,
+										"name": "T",
+										"package": "@mintie/sso",
+										"refersToTypeParameter": true
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						64
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						67,
+						68
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						72
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 200,
+					"character": 13
+				}
+			]
+		},
+		{
+			"id": 26,
+			"name": "MintieError",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Error thrown when the Mintie SSO API returns a non-2xx response."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 27,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 97,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 28,
+							"name": "MintieError",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 97,
+									"character": 2
+								}
+							],
+							"parameters": [
+								{
+									"id": 29,
+									"name": "code",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 30,
+									"name": "status",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 31,
+									"name": "message",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 26,
+								"name": "MintieError",
+								"package": "@mintie/sso"
+							},
+							"overwrites": {
+								"type": "reference",
+								"target": -1,
+								"name": "Error.constructor",
+								"package": "typescript"
+							}
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.constructor",
+						"package": "typescript"
+					}
+				},
+				{
+					"id": 37,
+					"name": "cause",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "../../../../../private/tmp/typedoc-gen/node_modules/typescript/lib/lib.es2022.error.d.ts",
+							"line": 24,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "unknown"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.cause"
+					}
+				},
+				{
+					"id": 32,
+					"name": "code",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Machine-readable error code, such as "
+							},
+							{
+								"kind": "code",
+								"text": "`not_found`"
+							},
+							{
+								"kind": "text",
+								"text": "."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 93,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 35,
+					"name": "message",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "../../../../../private/tmp/typedoc-gen/node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1075,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.message"
+					}
+				},
+				{
+					"id": 34,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "../../../../../private/tmp/typedoc-gen/node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1074,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.name"
+					}
+				},
+				{
+					"id": 36,
+					"name": "stack",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isExternal": true,
+						"isOptional": true,
+						"isInherited": true
+					},
+					"sources": [
+						{
+							"fileName": "../../../../../private/tmp/typedoc-gen/node_modules/typescript/lib/lib.es5.d.ts",
+							"line": 1076,
+							"character": 4
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"target": -1,
+						"name": "Error.stack"
+					}
+				},
+				{
+					"id": 33,
+					"name": "status",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isReadonly": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "HTTP status code of the response."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 95,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						27
+					]
+				},
+				{
+					"title": "Properties",
+					"children": [
+						37,
+						32,
+						35,
+						34,
+						36,
+						33
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 91,
+					"character": 13
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"target": {
+						"packageName": "typescript",
+						"packagePath": "lib/lib.es5.d.ts",
+						"qualifiedName": "Error"
+					},
+					"name": "Error",
+					"package": "typescript"
+				}
+			]
+		},
+		{
+			"id": 55,
+			"name": "SessionsResource",
+			"variant": "declaration",
+			"kind": 128,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Access to the "
+					},
+					{
+						"kind": "code",
+						"text": "`/sessions`"
+					},
+					{
+						"kind": "text",
+						"text": " endpoints.\n\nAvailable as "
+					},
+					{
+						"kind": "inline-tag",
+						"tag": "@link",
+						"text": "MintieClient.sessions",
+						"target": 68
+					},
+					{
+						"kind": "text",
+						"text": "."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 56,
+					"name": "constructor",
+					"variant": "declaration",
+					"kind": 512,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 171,
+							"character": 2
+						}
+					],
+					"signatures": [
+						{
+							"id": 57,
+							"name": "SessionsResource",
+							"variant": "signature",
+							"kind": 16384,
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 171,
+									"character": 2
+								}
+							],
+							"parameters": [
+								{
+									"id": 58,
+									"name": "client",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"target": 63,
+										"name": "MintieClient",
+										"package": "@mintie/sso"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": 55,
+								"name": "SessionsResource",
+								"package": "@mintie/sso"
+							}
+						}
+					]
+				},
+				{
+					"id": 60,
+					"name": "revoke",
+					"variant": "declaration",
+					"kind": 2048,
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 181,
+							"character": 8
+						}
+					],
+					"signatures": [
+						{
+							"id": 61,
+							"name": "revoke",
+							"variant": "signature",
+							"kind": 4096,
+							"flags": {},
+							"comment": {
+								"summary": [
+									{
+										"kind": "text",
+										"text": "Revoke an active user session. The user is signed out on their next request."
+									}
+								],
+								"blockTags": [
+									{
+										"tag": "@throws",
+										"content": [
+											{
+												"kind": "inline-tag",
+												"tag": "@link",
+												"text": "MintieError",
+												"target": 26
+											},
+											{
+												"kind": "text",
+												"text": " with code "
+											},
+											{
+												"kind": "code",
+												"text": "`not_found`"
+											},
+											{
+												"kind": "text",
+												"text": " if the session does not exist."
+											}
+										]
+									}
+								]
+							},
+							"sources": [
+								{
+									"fileName": "src/index.ts",
+									"line": 181,
+									"character": 8
+								}
+							],
+							"parameters": [
+								{
+									"id": 62,
+									"name": "sessionId",
+									"variant": "param",
+									"kind": 32768,
+									"flags": {},
+									"comment": {
+										"summary": [
+											{
+												"kind": "text",
+												"text": "Unique identifier of the session."
+											}
+										]
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"target": {
+									"packageName": "typescript",
+									"packagePath": "lib/lib.es5.d.ts",
+									"qualifiedName": "Promise"
+								},
+								"typeArguments": [
+									{
+										"type": "intrinsic",
+										"name": "void"
+									}
+								],
+								"name": "Promise",
+								"package": "typescript"
+							}
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"children": [
+						56
+					]
+				},
+				{
+					"title": "Methods",
+					"children": [
+						60
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 168,
+					"character": 13
+				}
+			]
+		},
+		{
+			"id": 7,
+			"name": "Connection",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "An SSO connection linking an identity provider to your organization."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 13,
+					"name": "createdAt",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "ISO 8601 timestamp when the connection was created."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 52,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 12,
+					"name": "domains",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Email domains routed to this connection during sign-in."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 50,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "intrinsic",
+							"name": "string"
+						}
+					}
+				},
+				{
+					"id": 8,
+					"name": "id",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Unique identifier of the connection."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 42,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 9,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Human-readable name shown on the sign-in page."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 44,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 10,
+					"name": "provider",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Identity provider type backing the connection."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 46,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 2,
+						"name": "IdentityProvider",
+						"package": "@mintie/sso"
+					}
+				},
+				{
+					"id": 11,
+					"name": "status",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Lifecycle status of the connection."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 48,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 1,
+						"name": "ConnectionStatus",
+						"package": "@mintie/sso"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						13,
+						12,
+						8,
+						9,
+						10,
+						11
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 40,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 14,
+			"name": "CreateConnectionParams",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Fields for creating a new SSO connection."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 17,
+					"name": "domains",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Email domains routed to this connection during sign-in."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 62,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "intrinsic",
+							"name": "string"
+						}
+					}
+				},
+				{
+					"id": 18,
+					"name": "metadataUrl",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "URL of the identity provider's SAML metadata document.\nRequired for "
+							},
+							{
+								"kind": "code",
+								"text": "`generic-saml`"
+							},
+							{
+								"kind": "text",
+								"text": " connections."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 67,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 15,
+					"name": "name",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Human-readable name shown on the sign-in page."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 58,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 16,
+					"name": "provider",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Identity provider type backing the connection."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 60,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 2,
+						"name": "IdentityProvider",
+						"package": "@mintie/sso"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						17,
+						18,
+						15,
+						16
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 56,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 19,
+			"name": "ListConnectionsParams",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Filters for listing SSO connections."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 21,
+					"name": "limit",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Maximum number of connections to return."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@defaultValue",
+								"content": [
+									{
+										"kind": "code",
+										"text": "`20`"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 79,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				},
+				{
+					"id": 20,
+					"name": "status",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Only return connections with this lifecycle status."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 73,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "reference",
+						"target": 1,
+						"name": "ConnectionStatus",
+						"package": "@mintie/sso"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						21,
+						20
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 71,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 3,
+			"name": "MintieClientOptions",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Configuration options for "
+					},
+					{
+						"kind": "inline-tag",
+						"tag": "@link",
+						"text": "MintieClient",
+						"target": 63
+					},
+					{
+						"kind": "text",
+						"text": "."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 4,
+					"name": "apiKey",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "API key created in the Mintie dashboard."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 24,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 5,
+					"name": "baseUrl",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Base URL of the Mintie SSO API."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@defaultValue",
+								"content": [
+									{
+										"kind": "code",
+										"text": "`\"https://api.mintie.example/v1\"`"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 30,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 6,
+					"name": "timeoutMs",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {
+						"isOptional": true
+					},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Request timeout in milliseconds."
+							}
+						],
+						"blockTags": [
+							{
+								"tag": "@defaultValue",
+								"content": [
+									{
+										"kind": "code",
+										"text": "`10000`"
+									}
+								]
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 36,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "number"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 22,
+					"character": 17
+				}
+			]
+		},
+		{
+			"id": 22,
+			"name": "Page",
+			"variant": "declaration",
+			"kind": 256,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "A page of results returned by list endpoints."
+					}
+				]
+			},
+			"children": [
+				{
+					"id": 24,
+					"name": "data",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Items in this page."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 85,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reference",
+							"target": 23,
+							"name": "T",
+							"package": "@mintie/sso",
+							"qualifiedName": "Page.T",
+							"refersToTypeParameter": true
+						}
+					}
+				},
+				{
+					"id": 25,
+					"name": "hasMore",
+					"variant": "declaration",
+					"kind": 1024,
+					"flags": {},
+					"comment": {
+						"summary": [
+							{
+								"kind": "text",
+								"text": "Whether more items exist beyond this page."
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/index.ts",
+							"line": 87,
+							"character": 2
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"children": [
+						24,
+						25
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 83,
+					"character": 17
+				}
+			],
+			"typeParameters": [
+				{
+					"id": 23,
+					"name": "T",
+					"variant": "typeParam",
+					"kind": 131072,
+					"flags": {}
+				}
+			]
+		},
+		{
+			"id": 1,
+			"name": "ConnectionStatus",
+			"variant": "declaration",
+			"kind": 2097152,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Lifecycle status of an SSO connection."
+					}
+				]
+			},
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 16,
+					"character": 12
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "literal",
+						"value": "active"
+					},
+					{
+						"type": "literal",
+						"value": "pending"
+					},
+					{
+						"type": "literal",
+						"value": "disabled"
+					}
+				]
+			}
+		},
+		{
+			"id": 2,
+			"name": "IdentityProvider",
+			"variant": "declaration",
+			"kind": 2097152,
+			"flags": {},
+			"comment": {
+				"summary": [
+					{
+						"kind": "text",
+						"text": "Identity provider type backing a connection."
+					}
+				]
+			},
+			"sources": [
+				{
+					"fileName": "src/index.ts",
+					"line": 19,
+					"character": 12
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "literal",
+						"value": "okta"
+					},
+					{
+						"type": "literal",
+						"value": "google-workspace"
+					},
+					{
+						"type": "literal",
+						"value": "generic-saml"
+					}
+				]
+			}
+		}
+	],
+	"groups": [
+		{
+			"title": "Classes",
+			"children": [
+				38,
+				63,
+				26,
+				55
+			]
+		},
+		{
+			"title": "Interfaces",
+			"children": [
+				7,
+				14,
+				19,
+				3,
+				22
+			]
+		},
+		{
+			"title": "Type Aliases",
+			"children": [
+				1,
+				2
+			]
+		}
+	],
+	"packageName": "@mintie/sso",
+	"symbolIdMap": {
+		"0": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": ""
+		},
+		"1": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionStatus"
+		},
+		"2": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "IdentityProvider"
+		},
+		"3": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClientOptions"
+		},
+		"4": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClientOptions.apiKey"
+		},
+		"5": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClientOptions.baseUrl"
+		},
+		"6": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClientOptions.timeoutMs"
+		},
+		"7": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Connection"
+		},
+		"8": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Connection.id"
+		},
+		"9": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Connection.name"
+		},
+		"10": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Connection.provider"
+		},
+		"11": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Connection.status"
+		},
+		"12": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Connection.domains"
+		},
+		"13": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Connection.createdAt"
+		},
+		"14": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "CreateConnectionParams"
+		},
+		"15": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "CreateConnectionParams.name"
+		},
+		"16": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "CreateConnectionParams.provider"
+		},
+		"17": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "CreateConnectionParams.domains"
+		},
+		"18": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "CreateConnectionParams.metadataUrl"
+		},
+		"19": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ListConnectionsParams"
+		},
+		"20": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ListConnectionsParams.status"
+		},
+		"21": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ListConnectionsParams.limit"
+		},
+		"22": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Page"
+		},
+		"23": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Page.T"
+		},
+		"24": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Page.data"
+		},
+		"25": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "Page.hasMore"
+		},
+		"26": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieError"
+		},
+		"27": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieError.__constructor"
+		},
+		"28": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieError"
+		},
+		"29": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "code"
+		},
+		"30": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "status"
+		},
+		"31": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "message"
+		},
+		"32": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieError.code"
+		},
+		"33": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieError.status"
+		},
+		"34": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "Error.name"
+		},
+		"35": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "Error.message"
+		},
+		"36": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es5.d.ts",
+			"qualifiedName": "Error.stack"
+		},
+		"37": {
+			"packageName": "typescript",
+			"packagePath": "lib/lib.es2022.error.d.ts",
+			"qualifiedName": "Error.cause"
+		},
+		"38": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource"
+		},
+		"39": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.__constructor"
+		},
+		"40": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource"
+		},
+		"41": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "client"
+		},
+		"43": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.list"
+		},
+		"44": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.list"
+		},
+		"45": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "params"
+		},
+		"46": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.get"
+		},
+		"47": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.get"
+		},
+		"48": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "connectionId"
+		},
+		"49": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.create"
+		},
+		"50": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.create"
+		},
+		"51": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "params"
+		},
+		"52": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.delete"
+		},
+		"53": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "ConnectionsResource.delete"
+		},
+		"54": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "connectionId"
+		},
+		"55": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "SessionsResource"
+		},
+		"56": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "SessionsResource.__constructor"
+		},
+		"57": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "SessionsResource"
+		},
+		"58": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "client"
+		},
+		"60": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "SessionsResource.revoke"
+		},
+		"61": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "SessionsResource.revoke"
+		},
+		"62": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "sessionId"
+		},
+		"63": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClient"
+		},
+		"64": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClient.__constructor"
+		},
+		"65": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClient"
+		},
+		"66": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "options"
+		},
+		"67": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClient.connections"
+		},
+		"68": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClient.sessions"
+		},
+		"72": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClient.request"
+		},
+		"73": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "MintieClient.request"
+		},
+		"74": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "T"
+		},
+		"75": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "method"
+		},
+		"76": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "path"
+		},
+		"77": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "options"
+		},
+		"78": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "__type"
+		},
+		"79": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "__type.query"
+		},
+		"80": {
+			"packageName": "@mintie/sso",
+			"packagePath": "src/index.ts",
+			"qualifiedName": "__type.body"
+		}
+	},
+	"files": {
+		"entries": {
+			"1": "src/index.ts"
+		},
+		"reflections": {
+			"1": 0
+		}
+	}
+}
