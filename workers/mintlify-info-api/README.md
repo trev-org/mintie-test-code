@@ -1,8 +1,8 @@
 # Mintlify Info API Worker
 
 This Cloudflare Worker converts an Auth0 user profile into Mintlify's user data
-format. It supports both the `groups: ["enterprise"]` checks and personalized
-content used by the Mintie documentation project.
+format. It supports the `partner` and `enterprise` access groups and
+personalized content used by the Mintie documentation project.
 
 The endpoint:
 
@@ -10,7 +10,7 @@ The endpoint:
 - requires `Authorization: Bearer <access_token>`
 - validates the token by calling Auth0's `/userinfo` endpoint
 - maps the authenticated Auth0 user's name to Mintlify's `content.name`
-- returns only the `enterprise` group when the configured Auth0 claim contains it
+- returns allowed Mintlify groups found in the configured Auth0 claim
 - limits the Mintlify session to 15 minutes or the JWT expiration, whichever is sooner
 - allows credentialed CORS only from the configured documentation origin
 - returns `Cache-Control: private, no-store`
@@ -31,11 +31,12 @@ exports.onExecutePostLogin = async (event, api) => {
 };
 ```
 
-Assign an enterprise user this app metadata:
+Assign users the `partner` or `enterprise` Auth0 role. Alternatively, set the
+same value in Auth0 app metadata:
 
 ```json
 {
-  "groups": ["enterprise"]
+  "groups": ["partner"]
 }
 ```
 
@@ -51,7 +52,7 @@ Update these values in `wrangler.jsonc`:
 - `AUTH0_DOMAIN`: Auth0 tenant or custom domain, such as `example.us.auth0.com`
 - `AUTH0_GROUPS_CLAIM`: exact custom claim key created by the Auth0 Action
 - `AUTH0_NAME_CLAIM`: Auth0 profile claim to expose as Mintlify `content.name`
-- `ENTERPRISE_GROUP`: group name used in the docs site's `docs.json`
+- `ALLOWED_GROUPS`: comma-separated Auth0 groups that Mintlify may receive
 - `SESSION_TTL_SECONDS`: user-data refresh interval, up to one hour
 
 The checked-in origin is `https://mintietest.mintlify.site`. Change it if the
@@ -81,12 +82,12 @@ curl --include \
   --header "Authorization: Bearer <auth0-access-token>"
 ```
 
-An enterprise user receives:
+A partner user receives:
 
 ```json
 {
   "expiresAt": 1893456000,
-  "groups": ["enterprise"],
+  "groups": ["partner"],
   "content": {
     "name": "Jane Doe"
   }
@@ -106,7 +107,7 @@ In the Mintlify dashboard:
    the scopes `openid profile email`.
 4. Set **Info API URL** to the deployed Worker `/userinfo` URL.
 5. Copy Mintlify's redirect URL into the Auth0 application's allowed callback URLs.
-6. Save and test with one enterprise and one non-enterprise account.
+6. Save and test with partner, enterprise, and unassigned accounts.
 
 With full authentication, the Operations pages are access-controlled. If you
 configure OAuth under Mintlify **Personalization** instead, the group only

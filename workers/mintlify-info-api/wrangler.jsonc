@@ -9,7 +9,7 @@
     "AUTH0_DOMAIN": "dev-4zlll1o27ywd47q5.us.auth0.com",
     "AUTH0_GROUPS_CLAIM": "https://morsemicro.com/groups",
     "AUTH0_NAME_CLAIM": "name",
-    "ENTERPRISE_GROUP": "enterprise",
+    "ALLOWED_GROUPS": "partner,enterprise",
     "SESSION_TTL_SECONDS": "900"
   }
 }

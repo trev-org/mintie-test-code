@@ -1,4 +1,4 @@
-const DEFAULT_ENTERPRISE_GROUP = "enterprise";
+const DEFAULT_ALLOWED_GROUPS = ["enterprise"];
 const DEFAULT_SESSION_TTL_SECONDS = 900;
 const MAX_SESSION_TTL_SECONDS = 3600;
 
@@ -125,8 +125,12 @@ export async function handleRequest(request, env, dependencies = {}) {
   );
   const nameClaim = env.AUTH0_NAME_CLAIM || "name";
   const name = normalizeName(readClaim(profile, nameClaim));
-  const enterpriseGroup =
-    env.ENTERPRISE_GROUP || DEFAULT_ENTERPRISE_GROUP;
+  const configuredAllowedGroups = normalizeGroups(env.ALLOWED_GROUPS, ",");
+  const allowedGroups = new Set(
+    configuredAllowedGroups.length
+      ? configuredAllowedGroups
+      : DEFAULT_ALLOWED_GROUPS,
+  );
   const nowSeconds = Math.floor(now() / 1000);
   const configuredExpiration =
     nowSeconds + getSessionTtlSeconds(env.SESSION_TTL_SECONDS);
@@ -143,7 +147,7 @@ export async function handleRequest(request, env, dependencies = {}) {
   return jsonResponse(
     {
       expiresAt,
-      groups: groups.includes(enterpriseGroup) ? [enterpriseGroup] : [],
+      groups: groups.filter((group) => allowedGroups.has(group)),
       content: name ? { name } : {},
     },
     200,

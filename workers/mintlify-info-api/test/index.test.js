@@ -12,7 +12,7 @@ const env = {
   AUTH0_DOMAIN: "dev-4zlll1o27ywd47q5.us.auth0.com",
   AUTH0_GROUPS_CLAIM: GROUPS_CLAIM,
   AUTH0_NAME_CLAIM: "name",
-  ENTERPRISE_GROUP: "enterprise",
+  ALLOWED_GROUPS: "partner,enterprise",
   SESSION_TTL_SECONDS: "900",
 };
 
@@ -135,6 +135,31 @@ test("returns personalization for a non-enterprise user", async () => {
     groups: [],
     content: {
       name: "Grace Hopper",
+    },
+  });
+});
+
+test("returns partner membership from the Auth0 custom claim", async () => {
+  const response = await handleRequest(
+    authenticatedRequest(),
+    env,
+    {
+      now: () => NOW_MS,
+      fetch: async () =>
+        Response.json({
+          sub: "auth0|user_246",
+          name: "Mary Jackson",
+          [GROUPS_CLAIM]: ["member", "partner"],
+        }),
+    },
+  );
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), {
+    expiresAt: 1_700_000_900,
+    groups: ["partner"],
+    content: {
+      name: "Mary Jackson",
     },
   });
 });
