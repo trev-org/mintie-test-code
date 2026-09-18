@@ -18,6 +18,8 @@ server/               Node/TS API
 web/                  React frontend (login, settings, hooks)
 shared/               Cross-cutting types
 sdk/                  Public TypeScript SDK (@mintie/sso) + TypeDoc artifact
+workers/              Deployable edge services
+  mintlify-info-api/  Auth0-to-Mintlify user-data mapping Worker
 ```
 
 ## SDK reference docs
