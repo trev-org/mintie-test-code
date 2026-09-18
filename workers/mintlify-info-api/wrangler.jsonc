@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "mintie-mintlify-info-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-24",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGIN": "https://mintietest.mintlify.site",
+    "AUTH0_DOMAIN": "dev-4zlll1o27ywd47q5.us.auth0.com",
+    "AUTH0_GROUPS_CLAIM": "https://morsemicro.com/groups",
+    "AUTH0_NAME_CLAIM": "name",
+    "ENTERPRISE_GROUP": "enterprise",
+    "SESSION_TTL_SECONDS": "900"
+  }
+}
