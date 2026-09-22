@@ -11,7 +11,8 @@ The endpoint:
 - validates the token by calling Auth0's `/userinfo` endpoint
 - maps the authenticated Auth0 user's name to Mintlify's `content.name`
 - returns allowed Mintlify groups found in the configured Auth0 claim
-- prefills the OpenWeather `appid` query parameter from a Cloudflare secret
+- prefills the OpenWeather `appid` query parameter with the key assigned to the
+  user's `partner` or `enterprise` group
 - limits the Mintlify session to 15 minutes or the JWT expiration, whichever is sooner
 - allows credentialed CORS only from the configured documentation origin
 - returns `Cache-Control: private, no-store`
@@ -59,9 +60,10 @@ Update these values in `wrangler.jsonc`:
 The checked-in origin is `https://mintietest.mintlify.site`. Change it if the
 deployed documentation uses another origin.
 
-Store the OpenWeather key as an encrypted Worker secret rather than adding it
+Store both OpenWeather keys as encrypted Worker secrets rather than adding them
 to `wrangler.jsonc` or another committed file. For local development, add
-`OPENWEATHER_API_KEY` to the ignored `.dev.vars` file.
+`OPENWEATHER_PARTNER_API_KEY` and `OPENWEATHER_ENTERPRISE_API_KEY` to the
+ignored `.dev.vars` file.
 
 ## 3. Test and deploy
 
@@ -70,7 +72,8 @@ npm install
 npm test
 npx wrangler login
 npm run deploy
-npx wrangler secret put OPENWEATHER_API_KEY
+npx wrangler secret put OPENWEATHER_PARTNER_API_KEY
+npx wrangler secret put OPENWEATHER_ENTERPRISE_API_KEY
 ```
 
 Wrangler prints the deployed `workers.dev` URL. The Mintlify Info API URL is:
@@ -99,7 +102,7 @@ A partner user receives:
   },
   "apiPlaygroundInputs": {
     "query": {
-      "appid": "<openweather-api-key>"
+      "appid": "<partner-openweather-api-key>"
     }
   }
 }
@@ -108,10 +111,12 @@ A partner user receives:
 `content.name` is copied from the configured Auth0 profile claim; the Worker
 does not provide a hard-coded fallback name.
 
-The API key is returned only after Auth0 accepts the user's access token.
-Authenticated users can still inspect and copy the key from their browser, so
-use a dedicated key with an appropriate request quota rather than a
-high-privilege production credential.
+The API key is returned only after Auth0 accepts the user's access token and
+the profile belongs to `partner` or `enterprise`. Users in both groups receive
+the enterprise key. Users in neither group receive no prefilled key.
+Authenticated users can still inspect and copy their assigned key from the
+browser, so use dedicated keys with appropriate request quotas rather than
+high-privilege production credentials.
 
 ## 4. Configure Mintlify
 

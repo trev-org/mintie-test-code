@@ -131,6 +131,7 @@ export async function handleRequest(request, env, dependencies = {}) {
       ? configuredAllowedGroups
       : DEFAULT_ALLOWED_GROUPS,
   );
+  const mintlifyGroups = groups.filter((group) => allowedGroups.has(group));
   const nowSeconds = Math.floor(now() / 1000);
   const configuredExpiration =
     nowSeconds + getSessionTtlSeconds(env.SESSION_TTL_SECONDS);
@@ -139,7 +140,7 @@ export async function handleRequest(request, env, dependencies = {}) {
     tokenExpiration && tokenExpiration > nowSeconds
       ? Math.min(configuredExpiration, tokenExpiration)
       : configuredExpiration;
-  const openWeatherApiKey = normalizeSecret(env.OPENWEATHER_API_KEY);
+  const openWeatherApiKey = getOpenWeatherApiKey(mintlifyGroups, env);
 
   console.log("Mintlify user-info response ready", {
     auth0Status: auth0Response.status,
@@ -148,7 +149,7 @@ export async function handleRequest(request, env, dependencies = {}) {
   return jsonResponse(
     {
       expiresAt,
-      groups: groups.filter((group) => allowedGroups.has(group)),
+      groups: mintlifyGroups,
       content: name ? { name } : {},
       ...(openWeatherApiKey && {
         apiPlaygroundInputs: {
@@ -263,6 +264,23 @@ function normalizeSecret(value) {
   }
 
   return value.trim() || null;
+}
+
+function getOpenWeatherApiKey(groups, env) {
+  const groupBindings = [
+    ["enterprise", env.OPENWEATHER_ENTERPRISE_API_KEY],
+    ["partner", env.OPENWEATHER_PARTNER_API_KEY],
+  ];
+
+  for (const [group, value] of groupBindings) {
+    const apiKey = normalizeSecret(value);
+
+    if (groups.includes(group) && apiKey) {
+      return apiKey;
+    }
+  }
+
+  return null;
 }
 
 function getSessionTtlSeconds(value) {
