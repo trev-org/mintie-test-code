@@ -139,6 +139,7 @@ export async function handleRequest(request, env, dependencies = {}) {
     tokenExpiration && tokenExpiration > nowSeconds
       ? Math.min(configuredExpiration, tokenExpiration)
       : configuredExpiration;
+  const openWeatherApiKey = normalizeSecret(env.OPENWEATHER_API_KEY);
 
   console.log("Mintlify user-info response ready", {
     auth0Status: auth0Response.status,
@@ -149,6 +150,13 @@ export async function handleRequest(request, env, dependencies = {}) {
       expiresAt,
       groups: groups.filter((group) => allowedGroups.has(group)),
       content: name ? { name } : {},
+      ...(openWeatherApiKey && {
+        apiPlaygroundInputs: {
+          query: {
+            appid: openWeatherApiKey,
+          },
+        },
+      }),
     },
     200,
     corsHeaders,
@@ -242,6 +250,14 @@ function normalizeGroups(value, delimiter) {
 }
 
 function normalizeName(value) {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  return value.trim() || null;
+}
+
+function normalizeSecret(value) {
   if (typeof value !== "string") {
     return null;
   }

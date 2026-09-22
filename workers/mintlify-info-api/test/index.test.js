@@ -6,6 +6,7 @@ import { handleRequest } from "../src/index.js";
 const ORIGIN = "https://mintietest.mintlify.site";
 const GROUPS_CLAIM = "https://morsemicro.com/groups";
 const NOW_MS = 1_700_000_000_000;
+const OPENWEATHER_API_KEY = "test-openweather-api-key";
 
 const env = {
   ALLOWED_ORIGIN: ORIGIN,
@@ -14,6 +15,7 @@ const env = {
   AUTH0_NAME_CLAIM: "name",
   ALLOWED_GROUPS: "partner,enterprise",
   SESSION_TTL_SECONDS: "900",
+  OPENWEATHER_API_KEY,
 };
 
 test("answers allowed CORS preflight requests", async () => {
@@ -111,6 +113,11 @@ test("returns enterprise membership and the Auth0 user's name", async () => {
     content: {
       name: "Ada Lovelace",
     },
+    apiPlaygroundInputs: {
+      query: {
+        appid: OPENWEATHER_API_KEY,
+      },
+    },
   });
 });
 
@@ -136,6 +143,11 @@ test("returns personalization for a non-enterprise user", async () => {
     content: {
       name: "Grace Hopper",
     },
+    apiPlaygroundInputs: {
+      query: {
+        appid: OPENWEATHER_API_KEY,
+      },
+    },
   });
 });
 
@@ -160,6 +172,11 @@ test("returns partner membership from the Auth0 custom claim", async () => {
     groups: ["partner"],
     content: {
       name: "Mary Jackson",
+    },
+    apiPlaygroundInputs: {
+      query: {
+        appid: OPENWEATHER_API_KEY,
+      },
     },
   });
 });
@@ -191,6 +208,11 @@ test("supports nested and delimited group claims", async () => {
     content: {
       name: "Katherine Johnson",
     },
+    apiPlaygroundInputs: {
+      query: {
+        appid: OPENWEATHER_API_KEY,
+      },
+    },
   });
 });
 
@@ -221,6 +243,11 @@ test("supports a configured Auth0 name claim", async () => {
     content: {
       name: "Dorothy Vaughan",
     },
+    apiPlaygroundInputs: {
+      query: {
+        appid: OPENWEATHER_API_KEY,
+      },
+    },
   });
 });
 
@@ -242,6 +269,36 @@ test("does not invent a name when Auth0 omits it", async () => {
     expiresAt: 1_700_000_900,
     groups: ["enterprise"],
     content: {},
+    apiPlaygroundInputs: {
+      query: {
+        appid: OPENWEATHER_API_KEY,
+      },
+    },
+  });
+});
+
+test("omits API playground inputs when the secret is not configured", async () => {
+  const { OPENWEATHER_API_KEY: _, ...envWithoutApiKey } = env;
+  const response = await handleRequest(
+    authenticatedRequest(),
+    envWithoutApiKey,
+    {
+      now: () => NOW_MS,
+      fetch: async () =>
+        Response.json({
+          sub: "auth0|user_654",
+          name: "Annie Easley",
+          [GROUPS_CLAIM]: ["enterprise"],
+        }),
+    },
+  );
+
+  assert.deepEqual(await response.json(), {
+    expiresAt: 1_700_000_900,
+    groups: ["enterprise"],
+    content: {
+      name: "Annie Easley",
+    },
   });
 });
 
