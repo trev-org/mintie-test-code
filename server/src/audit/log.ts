@@ -12,7 +12,8 @@ export type AuditEventKind =
   | 'jit.user.rejected'
   | 'jit.settings.updated'
   | 'apikey.issued'
-  | 'apikey.revoked';
+  | 'apikey.revoked'
+  | 'apikey.expired';
 
 export interface AuditEvent {
   kind: AuditEventKind;
