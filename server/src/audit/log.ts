@@ -8,6 +8,9 @@ export type AuditEventKind =
   | 'sso.unlink'
   | 'scim.user.provisioned'
   | 'scim.user.deactivated'
+  | 'jit.user.provisioned'
+  | 'jit.user.rejected'
+  | 'jit.settings.updated'
   | 'apikey.issued'
   | 'apikey.revoked';
 

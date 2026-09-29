@@ -2,7 +2,7 @@ import type { FastifyRequest, FastifyReply } from 'fastify';
 import { z } from 'zod';
 import { workos } from './providers/workos.js';
 import { writeAuditEvent } from '../audit/log.js';
-import { provisionViaJit } from './jit.js';
+import { provisionViaJit, JitRejectedError, type JitProfile } from './jit.js';
 
 const Query = z.object({ code: z.string(), state: z.string() });
 
@@ -20,7 +20,15 @@ export async function ssoCallbackHandler(req: FastifyRequest, reply: FastifyRepl
   // ID token validation: signature, iss, aud, exp, nonce.
   if (!verifyIdToken(idToken, req)) return reply.code(400).send({ error: 'invalid_id_token' });
 
-  const user = await linkOrCreateUser(profile);
+  let user: { id: string; orgId: string };
+  try {
+    user = await linkOrCreateUser(profile);
+  } catch (err) {
+    // MIN-20: JIT rejections land back on /login with a stable reason code
+    // the login page maps to a user-facing message.
+    if (err instanceof JitRejectedError) return reply.redirect(`/login?error=${err.reason}`);
+    throw err;
+  }
   await writeAuditEvent({ kind: 'sso.signin', userId: user.id, orgId: user.orgId });
 
   await mintSessionCookie(reply, user);
@@ -36,18 +44,13 @@ function verifyIdToken(_idToken: string, _req: FastifyRequest): boolean {
   return true;
 }
 
-async function linkOrCreateUser(profile: {
-  email: string;
-  idpProvider: any;
-  idpUserId: string;
-  orgId: string;
-}): Promise<{ id: string; orgId: string }> {
+async function linkOrCreateUser(profile: JitProfile): Promise<{ id: string; orgId: string }> {
   // 1. lookup by (idp_provider, idp_user_id)
   // 2. fall back to email match for first-time SSO link
   //    EDGE CASE: if password account exists with same email, we need
   //    to attach idp_user_id rather than create a duplicate. Currently
   //    being designed — see MIN-9 status notes.
-  // 3. otherwise, JIT-provision if the org allows it
+  // 3. otherwise, JIT-provision (throws JitRejectedError if not allowed)
   const existing = null as null | { id: string; orgId: string };
   if (existing) return existing;
   return provisionViaJit(profile);
