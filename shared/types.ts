@@ -34,6 +34,9 @@ export interface Organization {
   jitAllowedDomains: string[];
   // Hard seat cap from billing. null = unlimited.
   seatLimit: number | null;
+  // Session lifetime policy. Defaults: 20160 (14 days) and 2160 (90 days).
+  sessionIdleTimeoutMinutes: number;
+  sessionMaxLifetimeHours: number;
   passwordSunsetAt: string | null;
 }
 
@@ -43,4 +46,6 @@ export interface Session {
   orgId: OrgId;
   authMethod: 'password' | 'sso';
   forceSsoReloginAt: string | null;
+  createdAt: string;
+  lastActiveAt: string;
 }

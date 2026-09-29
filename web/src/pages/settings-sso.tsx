@@ -38,6 +38,9 @@ export function SsoSettingsPage() {
         See <a href="https://mintietest.mintlify.app/migration/timeline">Migration timeline</a>.
       </p>
 
+      <hr />
+      <SessionPolicyPanel />
+
       {jitAvailable && provider != null && (
         <>
           <hr />
@@ -211,5 +214,72 @@ function JitSettingsPanel() {
 function confirmRequireSso(): boolean {
   return window.confirm(
     'Requiring SSO will force every active password session in this org to re-authenticate via your IdP. Continue?',
+  );
+}
+
+// Session lifetime policy. Saved via PUT /api/auth/admin/sso/session-policy,
+// which requires step-up MFA. Admins can only tighten the defaults.
+function SessionPolicyPanel() {
+  const [idleTimeoutMinutes, setIdleTimeoutMinutes] = useState(20160);
+  const [maxLifetimeHours, setMaxLifetimeHours] = useState(2160);
+  const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/auth/admin/sso/session-policy')
+      .then((res) => res.json())
+      .then((p) => {
+        setIdleTimeoutMinutes(p.idleTimeoutMinutes);
+        setMaxLifetimeHours(p.maxLifetimeHours);
+      });
+  }, []);
+
+  async function save() {
+    setStatus('saving');
+    setError(null);
+    try {
+      const res = await fetch('/api/auth/admin/sso/session-policy', {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ idleTimeoutMinutes, maxLifetimeHours }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setStatus('saved');
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'save failed');
+      setStatus('error');
+    }
+  }
+
+  return (
+    <div>
+      <h2>Session lifetime</h2>
+      <label>
+        Idle timeout (minutes, 15–20160)
+        <input
+          type="number"
+          min={15}
+          max={20160}
+          value={idleTimeoutMinutes}
+          onChange={(e) => setIdleTimeoutMinutes(Number(e.target.value))}
+        />
+      </label>
+      <label>
+        Maximum session lifetime (hours, 1–2160)
+        <input
+          type="number"
+          min={1}
+          max={2160}
+          value={maxLifetimeHours}
+          onChange={(e) => setMaxLifetimeHours(Number(e.target.value))}
+        />
+      </label>
+      <p>Changes apply to existing sessions on their next request.</p>
+      <button onClick={save} disabled={status === 'saving'}>
+        {status === 'saving' ? 'Saving…' : 'Save'}
+      </button>
+      {status === 'saved' && <p>Saved.</p>}
+      {status === 'error' && <p role="alert">{error}</p>}
+    </div>
   );
 }
