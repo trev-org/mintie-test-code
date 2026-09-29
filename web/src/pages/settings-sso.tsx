@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useFlag } from '../hooks/useFlag.js';
 
 // MIN-15: admin-only settings page at /settings/auth/sso.
 // Connect IdP, view connection health, test sign-in, force SSO for the org.
@@ -7,6 +8,7 @@ type Provider = 'okta' | 'google' | 'generic-saml' | 'generic-oidc';
 export function SsoSettingsPage() {
   const [provider, setProvider] = useState<Provider | null>(null);
   const [requireSso, setRequireSso] = useState(false);
+  const jitAvailable = useFlag('jit_provisioning');
 
   return (
     <section>
@@ -35,6 +37,13 @@ export function SsoSettingsPage() {
         Turning this on stamps every active password session for re-auth (rolling 10%/min).
         See <a href="https://mintietest.mintlify.app/migration/timeline">Migration timeline</a>.
       </p>
+
+      {jitAvailable && provider != null && (
+        <>
+          <hr />
+          <JitSettingsPanel />
+        </>
+      )}
     </section>
   );
 }
@@ -122,6 +131,78 @@ function OktaConnectionPanel() {
         {status === 'saving' ? 'Connecting…' : 'Connect'}
       </button>
       {status === 'connected' && <p>Connected. Run a Test sign-in to verify.</p>}
+      {status === 'error' && <p role="alert">{error}</p>}
+    </div>
+  );
+}
+
+// MIN-20: JIT settings. Saved via PUT /api/auth/admin/sso/jit, which
+// requires step-up MFA and only accepts verified domains.
+function JitSettingsPanel() {
+  const [enabled, setEnabled] = useState(false);
+  const [defaultRole, setDefaultRole] = useState<'member' | 'viewer'>('member');
+  const [domains, setDomains] = useState('');
+  const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/api/auth/admin/sso/jit')
+      .then((res) => res.json())
+      .then((s) => {
+        setEnabled(s.enabled);
+        setDefaultRole(s.defaultRole);
+        setDomains(s.allowedDomains.join(', '));
+      });
+  }, []);
+
+  async function save() {
+    setStatus('saving');
+    setError(null);
+    try {
+      const res = await fetch('/api/auth/admin/sso/jit', {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          enabled,
+          defaultRole,
+          allowedDomains: domains.split(',').map((d) => d.trim()).filter(Boolean),
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setStatus('saved');
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'save failed');
+      setStatus('error');
+    }
+  }
+
+  return (
+    <div>
+      <h2>Just-in-time provisioning</h2>
+      <label>
+        <input type="checkbox" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} />
+        Create accounts on first SSO sign-in
+      </label>
+      <label>
+        Default role
+        <select value={defaultRole} onChange={(e) => setDefaultRole(e.target.value as 'member' | 'viewer')}>
+          <option value="member">Member</option>
+          <option value="viewer">Viewer</option>
+        </select>
+      </label>
+      <label>
+        Allowed email domains
+        <input
+          type="text"
+          placeholder="acme.com, acme.co.uk"
+          value={domains}
+          onChange={(e) => setDomains(e.target.value)}
+        />
+      </label>
+      <button onClick={save} disabled={status === 'saving'}>
+        {status === 'saving' ? 'Saving…' : 'Save'}
+      </button>
+      {status === 'saved' && <p>Saved.</p>}
       {status === 'error' && <p role="alert">{error}</p>}
     </div>
   );

@@ -11,5 +11,8 @@ export async function featureContextForOrg(orgId: OrgId) {
   return {
     ssoEnabled: await ld.variation('sso_enabled', ctx, false),
     ssoRequired: await ld.variation('sso_required', ctx, false),
+    // MIN-20: gates JIT for the beta cohort. org.jit_enabled is the admin's
+    // opt-in; both must be true for JIT to run.
+    jitProvisioning: await ld.variation('jit_provisioning', ctx, false),
   };
 }

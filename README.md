@@ -49,4 +49,4 @@ the next docs deployment picks it up.
 | MIN-17 | API keys tied to SSO identity | `server/src/auth/api-keys.ts` |
 | MIN-18 | Step-up MFA | `server/src/mfa/step-up.ts` |
 | MIN-19 | Audit log | `server/src/audit/log.ts` |
-| MIN-20 | JIT provisioning | `server/src/auth/jit.ts` |
+| MIN-20 | JIT provisioning | `server/src/auth/jit.ts`, `server/src/auth/admin-sso.ts`, `db/migrations/0045_add_jit_settings.sql` |
