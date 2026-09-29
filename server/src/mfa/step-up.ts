@@ -8,6 +8,7 @@ export type SensitiveAction =
   | 'apikey.create'
   | 'billing.change'
   | 'member.remove'
+  | 'session.policy.update'
   | 'sso.connection.update';
 
 export async function requireStepUp(_p: AuthenticatedPrincipal, _action: SensitiveAction) {

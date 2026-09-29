@@ -13,7 +13,8 @@ export type AuditEventKind =
   | 'jit.settings.updated'
   | 'apikey.issued'
   | 'apikey.revoked'
-  | 'apikey.expired';
+  | 'apikey.expired'
+  | 'session.policy.updated';
 
 export interface AuditEvent {
   kind: AuditEventKind;
