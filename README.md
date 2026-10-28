@@ -1,60 +1,33 @@
 # mintie-test-code
 
-## Algorithms
+Tested TypeScript implementations and structured metadata for the algorithm
+documentation in [`trev-org/mintie-test`](https://github.com/trev-org/mintie-test).
 
-The new [`algorithms/`](algorithms/) package contains tested TypeScript
-solutions and structured metadata used by Mintlify Automations to maintain the
-algorithm documentation. It is being introduced alongside the legacy SSO
-scaffold so the documentation cutover can be verified before that scaffold is
-removed.
+## Algorithm catalog
 
-Stub codebase for the **Mintie SSO** product, mirroring the SSO Migration project tracked in Linear ([SSO Migration project](https://linear.app/mintie-test/project/sso-migration-1d8666954d0b)) and Jira ([KAN-1](https://mintie-test.atlassian.net/browse/KAN-1)). Authoritative product docs live at [mintietest.mintlify.app](https://mintietest.mintlify.app).
+The [`algorithms/`](algorithms/) package is the source of truth for:
 
-This is a scaffolding repo — most files are intentionally stubs that match the ticket-level design decisions, not a runnable application.
+- ten coding-problem implementations and tests
+- reusable algorithm-pattern metadata
+- examples, edge cases, and time and space complexity
 
-## Layout
+Mintlify Automations watches merged pull requests that change `algorithms/**`.
+It opens a documentation pull request for human review and keeps the English,
+Spanish, and French pages aligned.
 
-```
-db/migrations/        SQL migrations (idp columns, force_sso_relogin_at, etc.)
-server/               Node/TS API
-  auth/               Guard, principals, OIDC callback, idp-lookup, providers
-  scim/               SCIM 2.0 endpoint
-  jobs/               Background workers (session migration, migration emails)
-  flags/              LaunchDarkly feature-flag wrapper
-  audit/              Auth-event audit log
-  mfa/                Step-up MFA
-web/                  React frontend (login, settings, hooks)
-shared/               Cross-cutting types
-sdk/                  Public TypeScript SDK (@mintie/sso) + TypeDoc artifact
-workers/              Deployable edge services
-  mintlify-info-api/  Auth0-to-Mintlify user-data mapping Worker
+```bash
+cd algorithms
+npm ci
+npm run check
 ```
 
-## SDK reference docs
+See [`algorithms/AUTOMATION.md`](algorithms/AUTOMATION.md) for the synchronization
+contract.
 
-`sdk/typedoc.json` is the TypeDoc JSON artifact for the SDK. The docs site
-([mintietest.mintlify.app](https://mintietest.mintlify.app)) fetches it from this repo's `main` branch at build
-time to generate the TypeScript SDK reference pages. After changing
-`sdk/src/`, regenerate it with `npm run docs` in `sdk/` and commit the result;
-the next docs deployment picks it up.
+## Retained worker
 
-## Ticket → file map
-
-| Ticket | What | Where |
-|---|---|---|
-| MIN-5 | WorkOS chosen as IdP abstraction | `server/src/auth/providers/workos.ts` |
-| MIN-6 | `idp_provider` / `idp_user_id` columns | `db/migrations/0042_add_idp_columns.sql` |
-| MIN-7 | `sso_enabled` flag wiring | `server/src/flags/feature-context.ts`, `web/src/hooks/useFlag.ts` |
-| MIN-8 | "Continue with SSO" entry point | `web/src/components/SsoButton.tsx`, `server/src/auth/idp-lookup.ts` |
-| MIN-9 | OIDC callback handler | `server/src/auth/sso-callback.ts` |
-| MIN-10 | Session migration job + frontend interceptor | `server/src/jobs/session-migration.ts`, `web/src/api-client.ts` |
-| MIN-11 | AuthGuard refactor (Principal interface) | `server/src/auth/guard.ts`, `server/src/auth/principals.ts` |
-| MIN-12 | Okta adapter | `server/src/auth/providers/okta.ts` |
-| MIN-13 | Google Workspace adapter | `server/src/auth/providers/google-workspace.ts` |
-| MIN-14 | SCIM 2.0 endpoint | `server/src/scim/routes.ts` |
-| MIN-15 | Admin UI for SSO config | `web/src/pages/settings-sso.tsx` |
-| MIN-16 | Migration prompt emails | `server/src/jobs/migration-emails.ts` |
-| MIN-17 | API keys tied to SSO identity | `server/src/auth/api-keys.ts` |
-| MIN-18 | Step-up MFA | `server/src/mfa/step-up.ts` |
-| MIN-19 | Audit log | `server/src/audit/log.ts` |
-| MIN-20 | JIT provisioning | `server/src/auth/jit.ts`, `server/src/auth/admin-sso.ts`, `db/migrations/0045_add_jit_settings.sql` |
+`workers/mintlify-info-api/` is retained because it may still back the
+documentation project's Auth0 personalization and API-key prefilling. It is
+independent of the retired SSO sample scaffold and should not be removed until
+the active Mintlify and Cloudflare configuration is audited with account
+access.

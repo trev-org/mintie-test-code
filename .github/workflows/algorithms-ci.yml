@@ -1,32 +1,41 @@
-name: Algorithms CI
+name: Repository CI
 
 on:
   pull_request:
-    paths:
-      - "algorithms/**"
-      - ".github/workflows/algorithms-ci.yml"
   push:
     branches:
       - main
-    paths:
-      - "algorithms/**"
-      - ".github/workflows/algorithms-ci.yml"
 
 permissions:
   contents: read
 
 jobs:
-  check:
+  algorithms:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: algorithms
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: algorithms/package-lock.json
       - run: npm ci
       - run: npm run check
+
+  worker:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: workers/mintlify-info-api
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: workers/mintlify-info-api/package-lock.json
+      - run: npm ci
+      - run: npm test
