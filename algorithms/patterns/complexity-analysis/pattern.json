@@ -1,0 +1,29 @@
+{
+  "slug": "complexity-analysis",
+  "title": "Complexity Analysis",
+  "summary": "Describe how runtime and auxiliary memory grow as input size increases.",
+  "whenToUse": [
+    "Compare valid approaches.",
+    "Explain scalability.",
+    "Document tradeoffs."
+  ],
+  "algorithmSteps": [
+    "Identify the input size.",
+    "Count dominant operations.",
+    "Drop constants and lower-order terms."
+  ],
+  "timeComplexity": "Varies by algorithm",
+  "spaceComplexity": "Varies by algorithm",
+  "exampleProblemSlugs": [
+    "two-sum",
+    "valid-parentheses",
+    "valid-palindrome",
+    "binary-search",
+    "merge-two-sorted-lists",
+    "best-time-to-buy-and-sell-stock",
+    "invert-binary-tree",
+    "flood-fill",
+    "climbing-stairs",
+    "maximum-subarray"
+  ]
+}

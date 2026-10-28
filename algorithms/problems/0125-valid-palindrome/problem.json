@@ -1,0 +1,31 @@
+{
+  "id": 125,
+  "slug": "valid-palindrome",
+  "title": "Valid Palindrome",
+  "difficulty": "easy",
+  "sourceUrl": "https://leetcode.com/problems/valid-palindrome/",
+  "summary": "Check whether the alphanumeric characters read the same forward and backward, ignoring case.",
+  "algorithmSteps": [
+    "Place one pointer at each end of the input.",
+    "Move each pointer past non-alphanumeric characters.",
+    "Compare lowercase characters and move inward until the pointers meet."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "examples": [
+    {
+      "input": "isPalindrome(\"A man, a plan, a canal: Panama\")",
+      "output": "true",
+      "explanation": "Ignoring spaces, punctuation, and case produces a palindrome."
+    }
+  ],
+  "edgeCases": [
+    "An empty string is a palindrome.",
+    "A string containing only punctuation is a palindrome.",
+    "Comparison is case-insensitive."
+  ],
+  "relatedPatterns": [
+    "complexity-analysis",
+    "two-pointers"
+  ]
+}

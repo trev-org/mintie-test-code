@@ -1,0 +1,31 @@
+{
+  "id": 70,
+  "slug": "climbing-stairs",
+  "title": "Climbing Stairs",
+  "difficulty": "easy",
+  "sourceUrl": "https://leetcode.com/problems/climbing-stairs/",
+  "summary": "Count the distinct ways to reach the top when each move climbs one or two steps.",
+  "algorithmSteps": [
+    "The ways to reach a step equal the sum of the ways to reach the previous two steps.",
+    "Track only those previous two values.",
+    "Advance the pair until reaching the requested step."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "examples": [
+    {
+      "input": "climbStairs(5)",
+      "output": "8",
+      "explanation": "The Fibonacci-style recurrence produces eight valid step sequences."
+    }
+  ],
+  "edgeCases": [
+    "One step has one valid route.",
+    "Two steps have two valid routes.",
+    "The implementation rejects non-positive step counts."
+  ],
+  "relatedPatterns": [
+    "complexity-analysis",
+    "dynamic-programming"
+  ]
+}

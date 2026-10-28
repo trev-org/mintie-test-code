@@ -1,5 +1,13 @@
 # mintie-test-code
 
+## Algorithms
+
+The new [`algorithms/`](algorithms/) package contains tested TypeScript
+solutions and structured metadata used by Mintlify Automations to maintain the
+algorithm documentation. It is being introduced alongside the legacy SSO
+scaffold so the documentation cutover can be verified before that scaffold is
+removed.
+
 Stub codebase for the **Mintie SSO** product, mirroring the SSO Migration project tracked in Linear ([SSO Migration project](https://linear.app/mintie-test/project/sso-migration-1d8666954d0b)) and Jira ([KAN-1](https://mintie-test.atlassian.net/browse/KAN-1)). Authoritative product docs live at [mintietest.mintlify.app](https://mintietest.mintlify.app).
 
 This is a scaffolding repo — most files are intentionally stubs that match the ticket-level design decisions, not a runnable application.

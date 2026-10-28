@@ -1,0 +1,20 @@
+{
+  "slug": "stacks",
+  "title": "Stacks",
+  "summary": "Process nested or most-recent state in last-in, first-out order.",
+  "whenToUse": [
+    "Validate nested delimiters.",
+    "Simulate recursion.",
+    "Track unresolved prior items."
+  ],
+  "algorithmSteps": [
+    "Push unresolved state.",
+    "Inspect or pop the latest state.",
+    "Validate the final stack."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(n)",
+  "exampleProblemSlugs": [
+    "valid-parentheses"
+  ]
+}

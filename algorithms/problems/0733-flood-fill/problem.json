@@ -1,0 +1,31 @@
+{
+  "id": 733,
+  "slug": "flood-fill",
+  "title": "Flood Fill",
+  "difficulty": "easy",
+  "sourceUrl": "https://leetcode.com/problems/flood-fill/",
+  "summary": "Recolor the connected component containing a starting cell in a grid.",
+  "algorithmSteps": [
+    "Remember the starting color and stop early if it already equals the replacement.",
+    "Use a stack to visit cells in the connected component.",
+    "Recolor each visited cell and add same-colored orthogonal neighbors."
+  ],
+  "timeComplexity": "O(rows × columns)",
+  "spaceComplexity": "O(rows × columns)",
+  "examples": [
+    {
+      "input": "floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2)",
+      "output": "[[2,2,2],[2,2,0],[2,0,1]]",
+      "explanation": "Every 1 connected to the center by an orthogonal path is recolored."
+    }
+  ],
+  "edgeCases": [
+    "Return an empty image unchanged.",
+    "Stop immediately when the replacement color matches the starting color.",
+    "Diagonal cells are not connected."
+  ],
+  "relatedPatterns": [
+    "complexity-analysis",
+    "graph-traversal"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "hash-maps",
+  "title": "Hash Maps",
+  "summary": "Store values by key for expected constant-time membership and lookup.",
+  "whenToUse": [
+    "Track values already seen.",
+    "Count frequencies.",
+    "Find a complement or duplicate."
+  ],
+  "algorithmSteps": [
+    "Choose a stable key.",
+    "Read before writing when order matters.",
+    "Store only the state needed later."
+  ],
+  "timeComplexity": "O(n) expected",
+  "spaceComplexity": "O(n)",
+  "exampleProblemSlugs": [
+    "two-sum"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": 704,
+  "slug": "binary-search",
+  "title": "Binary Search",
+  "difficulty": "easy",
+  "sourceUrl": "https://leetcode.com/problems/binary-search/",
+  "summary": "Find a target value in a sorted array and return its index.",
+  "algorithmSteps": [
+    "Track inclusive left and right boundaries.",
+    "Compare the target with the middle value.",
+    "Discard the half that cannot contain the target and repeat."
+  ],
+  "timeComplexity": "O(log n)",
+  "spaceComplexity": "O(1)",
+  "examples": [
+    {
+      "input": "binarySearch([-1, 0, 3, 5, 9, 12], 9)",
+      "output": "4",
+      "explanation": "The target 9 is stored at index 4."
+    }
+  ],
+  "edgeCases": [
+    "Return -1 when the target is absent.",
+    "The input array may be empty.",
+    "The array must already be sorted in ascending order."
+  ],
+  "relatedPatterns": [
+    "complexity-analysis",
+    "binary-search"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "linked-lists",
+  "title": "Linked Lists",
+  "summary": "Traverse and reconnect nodes without moving the values they contain.",
+  "whenToUse": [
+    "Insert or remove through references.",
+    "Merge node chains.",
+    "Use constant auxiliary space."
+  ],
+  "algorithmSteps": [
+    "Keep references to current nodes.",
+    "Reconnect one link at a time.",
+    "Preserve the next node before overwriting a link."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "exampleProblemSlugs": [
+    "merge-two-sorted-lists"
+  ]
+}

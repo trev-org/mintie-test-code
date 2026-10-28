@@ -1,0 +1,31 @@
+{
+  "id": 1,
+  "slug": "two-sum",
+  "title": "Two Sum",
+  "difficulty": "easy",
+  "sourceUrl": "https://leetcode.com/problems/two-sum/",
+  "summary": "Return the indexes of two numbers whose sum equals the target.",
+  "algorithmSteps": [
+    "Create a map from previously seen values to their indexes.",
+    "For each value, compute the complement needed to reach the target.",
+    "Return the saved complement index and the current index when the complement exists."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(n)",
+  "examples": [
+    {
+      "input": "twoSum([2, 7, 11, 15], 9)",
+      "output": "[0, 1]",
+      "explanation": "The values at indexes 0 and 1 add up to 9."
+    }
+  ],
+  "edgeCases": [
+    "The matching value may appear twice at different indexes.",
+    "Negative values and a negative target are valid.",
+    "Return null when no pair exists."
+  ],
+  "relatedPatterns": [
+    "complexity-analysis",
+    "hash-maps"
+  ]
+}
