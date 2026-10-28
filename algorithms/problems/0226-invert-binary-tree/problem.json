@@ -1,0 +1,31 @@
+{
+  "id": 226,
+  "slug": "invert-binary-tree",
+  "title": "Invert Binary Tree",
+  "difficulty": "easy",
+  "sourceUrl": "https://leetcode.com/problems/invert-binary-tree/",
+  "summary": "Mirror a binary tree by swapping every node's left and right children.",
+  "algorithmSteps": [
+    "Return immediately for an empty subtree.",
+    "Recursively invert the left and right subtrees.",
+    "Assign the inverted right subtree to the left and the inverted left subtree to the right."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(h)",
+  "examples": [
+    {
+      "input": "invertTree(new TreeNode(2, new TreeNode(1), new TreeNode(3)))",
+      "output": "TreeNode(2, 3, 1)",
+      "explanation": "The left and right child of every node are exchanged."
+    }
+  ],
+  "edgeCases": [
+    "An empty tree remains empty.",
+    "A single-node tree is unchanged.",
+    "Recursion uses stack space proportional to the tree height."
+  ],
+  "relatedPatterns": [
+    "complexity-analysis",
+    "tree-traversal"
+  ]
+}

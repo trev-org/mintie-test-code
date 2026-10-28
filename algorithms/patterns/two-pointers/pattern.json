@@ -1,0 +1,21 @@
+{
+  "slug": "two-pointers",
+  "title": "Two Pointers",
+  "summary": "Move two indexes through a sequence while maintaining a useful relationship.",
+  "whenToUse": [
+    "Compare values from both ends.",
+    "Merge sorted sequences.",
+    "Avoid a nested scan."
+  ],
+  "algorithmSteps": [
+    "Initialize pointers at meaningful boundaries.",
+    "Move the pointer that cannot remain.",
+    "Stop when the search region is exhausted."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "exampleProblemSlugs": [
+    "valid-palindrome",
+    "merge-two-sorted-lists"
+  ]
+}

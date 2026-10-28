@@ -1,0 +1,20 @@
+{
+  "slug": "tree-traversal",
+  "title": "Tree Traversal",
+  "summary": "Visit every node through recursive or iterative depth-first or breadth-first traversal.",
+  "whenToUse": [
+    "Transform a tree.",
+    "Aggregate subtree results.",
+    "Search hierarchical data."
+  ],
+  "algorithmSteps": [
+    "Define the empty-tree base case.",
+    "Process the current node.",
+    "Traverse the child subtrees."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(h)",
+  "exampleProblemSlugs": [
+    "invert-binary-tree"
+  ]
+}

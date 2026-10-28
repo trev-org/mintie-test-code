@@ -1,0 +1,20 @@
+{
+  "slug": "binary-search",
+  "title": "Binary Search",
+  "summary": "Repeatedly discard half of an ordered search space.",
+  "whenToUse": [
+    "Search sorted data.",
+    "Find a monotonic boundary.",
+    "Reduce linear search to logarithmic time."
+  ],
+  "algorithmSteps": [
+    "Define inclusive or exclusive bounds.",
+    "Evaluate the midpoint.",
+    "Discard the impossible half."
+  ],
+  "timeComplexity": "O(log n)",
+  "spaceComplexity": "O(1)",
+  "exampleProblemSlugs": [
+    "binary-search"
+  ]
+}

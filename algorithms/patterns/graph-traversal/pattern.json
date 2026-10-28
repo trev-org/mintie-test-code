@@ -1,0 +1,20 @@
+{
+  "slug": "graph-traversal",
+  "title": "Graph Traversal",
+  "summary": "Explore connected vertices with a queue or stack while preventing duplicate work.",
+  "whenToUse": [
+    "Find connected components.",
+    "Explore grids.",
+    "Determine reachability."
+  ],
+  "algorithmSteps": [
+    "Choose a starting vertex.",
+    "Mark vertices before revisiting them.",
+    "Add each unvisited neighbor to the frontier."
+  ],
+  "timeComplexity": "O(vertices + edges)",
+  "spaceComplexity": "O(vertices)",
+  "exampleProblemSlugs": [
+    "flood-fill"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "slug": "dynamic-programming",
+  "title": "Dynamic Programming",
+  "summary": "Reuse solutions to overlapping subproblems instead of recomputing them.",
+  "whenToUse": [
+    "A result depends on smaller repeated states.",
+    "An optimal answer has optimal substructure.",
+    "A recurrence can be evaluated in order."
+  ],
+  "algorithmSteps": [
+    "Define the state.",
+    "Write the transition.",
+    "Set base cases and evaluate states in dependency order."
+  ],
+  "timeComplexity": "O(number of states × transition cost)",
+  "spaceComplexity": "O(number of retained states)",
+  "exampleProblemSlugs": [
+    "climbing-stairs",
+    "maximum-subarray"
+  ]
+}

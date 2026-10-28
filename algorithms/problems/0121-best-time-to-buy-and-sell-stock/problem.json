@@ -1,0 +1,31 @@
+{
+  "id": 121,
+  "slug": "best-time-to-buy-and-sell-stock",
+  "title": "Best Time to Buy and Sell Stock",
+  "difficulty": "easy",
+  "sourceUrl": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+  "summary": "Find the largest profit from one purchase followed by one later sale.",
+  "algorithmSteps": [
+    "Track the lowest price seen so far.",
+    "At each price, calculate the profit from selling after that lowest price.",
+    "Keep the largest non-negative profit."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "examples": [
+    {
+      "input": "maxProfit([7, 1, 5, 3, 6, 4])",
+      "output": "5",
+      "explanation": "Buying at 1 and selling later at 6 produces the largest profit."
+    }
+  ],
+  "edgeCases": [
+    "Return 0 when prices only decrease.",
+    "A list with fewer than two prices has no possible profit.",
+    "The sale must occur after the purchase."
+  ],
+  "relatedPatterns": [
+    "complexity-analysis",
+    "greedy-scans"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": 20,
+  "slug": "valid-parentheses",
+  "title": "Valid Parentheses",
+  "difficulty": "easy",
+  "sourceUrl": "https://leetcode.com/problems/valid-parentheses/",
+  "summary": "Determine whether every opening bracket is closed in the correct order.",
+  "algorithmSteps": [
+    "Push each opening bracket onto a stack.",
+    "For a closing bracket, pop the stack and compare it with the required opener.",
+    "The string is valid only when every comparison succeeds and the stack ends empty."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(n)",
+  "examples": [
+    {
+      "input": "isValidParentheses(\"([]{})\")",
+      "output": "true",
+      "explanation": "Every closing bracket matches the most recent unmatched opener."
+    }
+  ],
+  "edgeCases": [
+    "An empty string is valid.",
+    "A closing bracket cannot appear before its opener.",
+    "A leftover opening bracket makes the string invalid."
+  ],
+  "relatedPatterns": [
+    "complexity-analysis",
+    "stacks"
+  ]
+}

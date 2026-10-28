@@ -1,0 +1,21 @@
+{
+  "slug": "greedy-scans",
+  "title": "Greedy One-Pass Scans",
+  "summary": "Maintain the best local state needed to make each next decision.",
+  "whenToUse": [
+    "A local choice cannot hurt future choices.",
+    "Only a running optimum is needed.",
+    "The input can be processed once."
+  ],
+  "algorithmSteps": [
+    "Define the invariant carried forward.",
+    "Update it from the current value.",
+    "Record the best complete answer."
+  ],
+  "timeComplexity": "O(n)",
+  "spaceComplexity": "O(1)",
+  "exampleProblemSlugs": [
+    "best-time-to-buy-and-sell-stock",
+    "maximum-subarray"
+  ]
+}
