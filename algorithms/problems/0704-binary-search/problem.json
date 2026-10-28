@@ -17,6 +17,11 @@
       "input": "binarySearch([-1, 0, 3, 5, 9, 12], 9)",
       "output": "4",
       "explanation": "The target 9 is stored at index 4."
+    },
+    {
+      "input": "binarySearch([-1, 0, 3, 5, 9, 12], 2)",
+      "output": "-1",
+      "explanation": "The function returns -1 when the target is absent."
     }
   ],
   "edgeCases": [
